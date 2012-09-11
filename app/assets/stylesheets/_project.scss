@@ -1,109 +1,420 @@
-$height_nav: 50px;
-
-body {
-  margin-top: $height_nav*2;
-  @include respond-max(em(480px)) {
-    padding-left: em(16px);
-    padding-right: em(16px);
+nav { 
+  ul {
+    margin: 0;
+    padding: 0;
   }
-  @include respond-min(em(480px)) {
-    padding-left: em(32px);
-    padding-right: em(32px);
+  li {
+    margin: 0;
+    padding: 0;
   }
 }
 
 .container {
   position: relative;
+  width: 100%;
+  @include respond-min($pad) {
+    margin: 0 auto;
+    width: $pad;
+  }
   @include respond-min($desktop) {
     margin: 0 auto;
-    max-width: em(960px);
+    width: $desktop;
   }
 }
 
-/* 
-
-top nav 
-
-*/
-
-#top-header {
-  position: fixed;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: $height_nav;
-  background: $color_3;
-}
-#top-nav {
-  @extend nav;
-  float: left;
-  ul {
-    margin: 0;
-    padding: 0;
+header {
+  @extend .clearfix;
+  background-color: $color_1;
+  padding: 0 0 0 em(16px);
+  @include min-height(em(63px));
+  @include respond-min($pad) {
+    margin: em(20px) 0 em(1px) 0;
   }
-  ul, li, a {
-    height: $height_nav;
-    line-height: $height_nav;
-  }
-  li {
-    float: left;
-    margin: 0; 
-  }
-  a {
-    float: left;
-    display: block;
-    padding: 0 em(16px);
-    color: #fff;
-    &:hover {
-      color: #fff;
-      background-color: lighten($color_3,20);
-    }
-  }
-}
-#account-nav {
-  @extend nav;
-  @include single-transition('background-color', 0.15s, ease-out);
-  position: relative;
-  width: em(75px);
-  height: $height_nav;
-  float: right;
-  background: image-url("nav/account.png") no-repeat 0 0;
-  &:hover {
-    cursor: pointer;
-  }
-  &:hover, &.on {
-    background-color: lighten($color_3,10);
-    background-position: 0 -50px;
-  }
-  &.on {
-   ul {
-     display: block;
-   }
-  }
-  ul {
-    z-index: 10;
-    display: none;
-    position: absolute;
-    right: 0;
-    top: $height_nav;
-    padding: 0;
-    margin: 0;
-    width: em(185px);
-    background-color: lighten($color_3,10);
-    li {
-      margin: 0;
-      padding: 0;
-      list-style: none;
+  .logo {
+    margin: em(19px) 0 0 0;
+    width: em(187px);
+    @include respond-min($pad) {
+      float: left;
     }
     a {
-      display: block;
-      padding: em(8px) em(16px);
-      color: #fff;
+      @extend .hide;
+      height: em(28px);
+      background: image-url("shared/logo.jpg") no-repeat;
+    }
+  }
+  ul {
+    margin: em(20px) 0 em(20px) 0;
+    clear: both;
+    @include respond-min($pad) {
+      margin: em(34px) 0 0 0;
+      clear: inherit;
+      float: right;
+    }
+  }
+  li {
+    line-height: em(17px);
+    float: left;
+    margin: 0 em(16px) 0 0;
+    padding: 0 em(16px) 0 0;
+    border-right: 1px solid #fff;
+    color: #fff;
+    font-size: em(12px);
+    &:last-child {
+      border: 0;
+      margin-right: 0;
+    }
+    a {
+      color: $color_body_nav;
+      text-decoration: underline;
       &:hover {
-        color: #fff;
-        background-color: lighten($color_3,20);
+        color: lighten($color_body_nav, 20);
       }
     }
   }
 }
+.top-bar {
+  @extend .clearfix;
+  overflow: visible;
+  $height_nav: 31px;
+  background: $color_2;
+  @include respond-min($pad) {
+    height: $height_nav;
+    ul {
+      padding: 0;
+    }
+    nav {
+      float: left;
+    }
+  }
+  ul {
+    padding: 0 0 0 em(13px);
+  }
+  li {
+    position: relative;
+    z-index: 1;
+//    @include respond-min($pad) {
+      float: left;
+//    }
+    &.on {
+      @include respond-min($pad) {
+        &:after {
+          $height_nav_tri: 8px;
+          content: "";
+          display: block;
+          position: absolute;
+          bottom: -$height_nav_tri;
+          left: 0;
+          z-index: 2;
+          width: 100%;
+          height: $height_nav_tri;
+          background: transparent image-url("shared/nav-on.png") no-repeat 50% 0;
+        }
+      }
+      a, a:hover {
+        color: #fff;
+        background-color: transparent;
+      }
+    }
+    a {
+      padding: 0 em(6px);
+      @include respond-min($pad) {
+        padding: 0 em(19px);
+      }
+      height: $height_nav;
+      line-height: $height_nav;
+      display: block;
+      font-size: em(14px);
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #c1c1c1;
+      border-right: 1px solid $color_1;
+      &:hover {
+        color: #fff;
+        background-color: rgba(255,255,255,0.2);
+      }
+    }
+  }
+  form {
+    @extend .clearfix;
+    padding: em(3px) em(19px);
+    background: $color_1;
+    clear: both;
+    @include respond-min($pad) {
+      clear: inherit;
+      padding: 0 em(6px) 0 0;
+      background: transparent;
+      float: right;
+    }
+    a {
+      float: left;
+      margin: 0 em(12px) 0 0;
+      display: block;
+      height: $height_nav;
+      line-height: $height_nav;
+      font-size: em(12px);
+      color: $color_body_nav;
+      text-decoration: underline;
+      &:hover {
+        color: lighten($color_body_nav, 20);
+      }
+    }
+    label {
+      display: none;
+    }
+    div {
+      float: left;
+      margin: 0;
+      padding: 0;
+    }
+    input {
+      height: 20px;
+      border: 1px solid #1a1a1a;
+      font-size: em(12px);      
+      border-radius: 0;
+    }
+    input[type="text"] {
+      $color_input_1: #fff;
+      $color_input_2: #e5e5e5;
+      width: em(161px);
+      margin: 0 em(3px) 0 0;
+      @include filter-gradient($color_input_1, $color_input_2, vertical);
+      @include background-image(linear-gradient(top, $color_input_1 0%,$color_input_2 49%,$color_input_2 51%,$color_input_2 100%));
+    }  
+    .submit {
+      padding: 1px 0 0 0;
+      $color_grad_1: #cecece;
+      $color_grad_2: #c0c0c0;
+      $color_grad_3: #ababab;
+      $color_grad_4: #9b9b9b;
+      input[type="submit"] {
+        margin: 0;
+        padding: 0;
+        width: 35px;
+        background-color: $color_grad_1;
+        @include filter-gradient($color_grad_1, $color_grad_4, vertical);
+        @include background-image(linear-gradient(top, $color_grad_1 0%,$color_grad_2 50%,$color_grad_3 51%,$color_grad_4 100%));      
+        color: $color_1;
+        &:focus, &:active {
+          background-color: $color_grad_1;
+          @include filter-gradient($color_grad_4, $color_grad_1, vertical);
+          @include background-image(linear-gradient(top, $color_grad_4 0%,$color_grad_3 50%,$color_grad_2 51%,$color_grad_1 100%));      
+        }
+      }
+    }  
+  }
+}
+
+.main {
+  margin: em(20px) 0;
+  padding: em(16px);
+  background: #fff;
+  h1 {
+    margin-top: 0;
+  }
+}
+
+.toolbar {
+  @extend .clearfix;
+  margin: $margin_default 0 0 0;
+  $height_bar: 44px;
+  padding: 0 em(15px) em(15px) em(15px);
+  background: $color_3;
+  border: 1px solid darken($color_3,10);
+  border-radius: 6px;
+  @include respond-min($pad) {
+    height: em($height_bar);
+    padding-bottom: 0;
+  }
+  p, label, select, li {
+    font-size: em(12px);
+  }
+  p {
+    $my_margin: 6px;
+    margin: $my_margin 0;
+    font-size: em(12px);
+    @include respond-min($pad) {
+      float: left;
+      width: em(225px);
+      line-height: $height_bar - (2 * $my_margin);
+      border-right: 1px solid darken($color_3,10);
+    }
+  }
+  form {
+    @extend .clearfix;
+    overflow: visible;
+    label {
+      display: block;
+      width: auto;
+      @include respond-min($pad) {
+        display: inline-block;
+        float: left;
+        height: $height_bar;
+        line-height: $height_bar;
+        margin: 0 em(6px) 0 0;
+        padding: 0 0 0 em(24px);
+      }
+    }
+    select {
+      margin: 0;
+      width: 100%;
+      @include respond-min($pad) {
+        float: left;
+        width: 100px;
+        margin: em(17px) 0 0 0;
+      }
+      @include respond-min($desktop) {
+        width: 200px;
+      }
+    }    
+    @include respond-min($pad) {
+      float: right;
+      div {
+        float: left;
+        margin: 0;
+      }
+    }
+  }
+  .view-as {
+    @extend .clearfix;
+    width: 100%;
+    padding: 0;
+    @include respond-min($pad) {
+      width: auto;
+      float: left;
+    }
+    li {
+      float: left;
+    }
+    .text {
+      margin: 0 7px 0 0;
+      height: $height_bar;
+      line-height: $height_bar;
+    }
+    .icon {
+      width: em(24px);
+      margin: 12px 5px 0 0;
+      a {
+        @extend .hide;
+        display: block;
+        height: em(22px);
+        background: #d3d3d3;
+        border: 1px #494949 solid;
+        border-radius: 2px;
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+}
+
+.results {
+  padding: em(16px) 0 em(16px) 0;
+  margin-left: em(-16px);
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    line-height: 0;
+    content: "";
+    clear: both;
+  }
+}
+
+.child {
+  $size_img: 101px;
+  margin: 0 0 em(16px) em(16px);
+  background: $color_5;
+  border: 1px solid $color_borders;
+  @include respond-min($pad) {
+    float: left;
+    width: 360px;
+  }
+  @include respond-min($desktop) {
+    width: 305px;
+  }
+  .url {
+    @extend .clearfix;
+    @include min-height(em($size_img));
+    display: block;
+    padding: em(10px) em(10px) em(15px) em(10px);
+    &:hover {
+      background: rgba(255,255,255,0.9);
+    }
+  }
+  .photo {
+    float: left;
+    @include size($size_img);
+    border: 1px solid $color_borders;
+    overflow: hidden;
+  }
+  .id {
+    margin: 0 0 0 em($size_img + 13px);
+    padding: em(5px) 0 0 0;
+    h2 { 
+      margin: 0;
+      padding: 0 0 em(9px) 0;
+      border-bottom: 1px solid $color_borders;
+      font-size: em(14px);
+      span {
+        display: block;
+        color: $color_body_links;
+        font-weight: bold;
+      }
+    }
+    h3 {
+      margin: em(15px) 0 0 0;
+      color: #535353;
+      font-size: em(12px);
+    }
+    p.updated {
+      margin: em(5px) 0 0 0;
+      line-height: 1.3;
+      color: $color_default_text;
+      font-size: em(12px);
+    }
+  }
+  .tools {
+    $height_tools: 28px;
+    @extend .clearfix;
+    height: $height_tools;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: $color_6;
+    border-top: 1px solid $color_borders;
+    li {
+      height: 21px;
+      margin: em(3px) 0 0 em(12px);
+      padding: 0 em(12px) 0 0;
+      float: left;
+      border-right: 1px solid $color_borders;
+      &:last-child {
+        border: 0;
+      }
+      a {
+        display: block;
+        font-size: em(12px);
+        color: $color_body_links;
+        &:hover {
+          opacity: 0.75;
+          color: #000;
+        }
+      }
+    }
+    .edit a {
+      background: image-url("icons/edit.png") no-repeat 0 3px;
+      padding-left: 14px;
+    }
+    .flag a {
+      background: image-url("icons/flag.png") no-repeat 0 3px;
+      padding-left: 16px;
+    }
+    .duplicate a {
+      background: image-url("icons/duplicate.png") no-repeat 0 3px;
+      padding-left: 25px;
+    }
+  }
+}
+
+

@@ -1,18 +1,32 @@
-header#top-header
-  .shell
-    #top-nav
-      ul
-        li
-          a.logo href="/" Home
-        li
-          a.logo href="/styles" Styles
-        li
-          a.logo href="/styles#forms" Forms
-    #account-nav.anim
-      ul
-        li
-          a href="" Chris Cheshire
-        li
-          a href="" Settings
-        li
-          a href="" Sign Out
+header
+  .logo
+    a href="/" RapidFTR
+  nav
+    ul
+      li
+        |Welcome Robin, 
+        a href="/" Logout
+      li
+        a href="/" My Account
+      li
+        a href="/" Contact & Help
+.top-bar
+  nav
+    ul
+      li.nav-children.on
+        a href="/" Children
+      li.nav-forms
+        a href="/" Forms
+      li.nav-users
+        a href="/" Users
+      li.nav-device
+        a href="/" Device
+      li.nav-reports
+        a href="/" Reports
+  form action="#"
+    a.adv-search href="/" Advanced Search
+    div
+      label for="search-child" Search Child
+      input#search-child.field type="text" placeholder="Search Child"
+    .submit
+      input type="submit" value="Go"

@@ -57,6 +57,11 @@ $old-ie: false !default;
   height: $height; 
 } 
 
+@mixin size($size) {
+  width: $size;
+  height: $size;
+}
+
 @function em($target, $context: $font-base) {
    @if $target == 0 { @return 0 }
    @return $target / $context + 0em;

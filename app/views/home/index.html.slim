@@ -1,4 +1,33 @@
 - content_for :page_title do 
   = "index"
 
-h1 Rapid
+h1 List of Children
+
+.toolbar
+  p Show All 4 of records
+  form action="#"
+    nav.view-as
+      ul
+        li.text View as
+        li.icon.list
+          a href="" title="List" List
+        li.icon.cols
+          a href="" title="Columns" Columns
+    div
+      label for="filter-show" Show
+      select#filter-show
+        option All
+        option Option Two
+        option Option Three
+    div
+      label for="sort-by" Sort by
+      select#sort-by
+        option Date Created
+        option Option Two
+        option Option Three
+
+.results
+  == render "home/child"
+  == render "home/child"
+  == render "home/child"
+  == render "home/child"

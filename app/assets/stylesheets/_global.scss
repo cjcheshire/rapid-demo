@@ -1,13 +1,25 @@
 .hide {
   @include hide-text();
+  display: block;
 }
 
 /* ============================================================
     Sections
 ============================================================ */
 
+//.clearfix {
+//  @include clearfix;
+//}
 .clearfix {
-  @include clearfix;
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
 }
 
 body, body * {
@@ -35,15 +47,13 @@ nav {
 h1 {
   margin: em(24px) 0 0 0;
   color: $color_2;
-  font: 500 #{em(60px)}/#{em(19px)} $heading_fontstack; 
-  letter-spacing: -0.075em;
+  font: bold #{em(18px)}/#{em(16px)} $heading_fontstack; 
 }
 h2 {
   margin: em(12px) 0 0 0;
   padding: 11px 0 0 0;
   color: $color_2;
   font: 300 #{em(36px)}/#{em(19px)} $heading_fontstack;
-  letter-spacing: -0.075em;
 }
 h3 {
   margin: em(20px) 0 0 0;
@@ -153,7 +163,7 @@ figure {
     Text-level semantics
 ============================================================ */
 a {
-  color: $color_2;
+  color: $color_body_links;
   font-size: 100%;
   font-family: arial ,sans-serif;
   text-decoration: none;
@@ -161,9 +171,8 @@ a {
 .main a {
   &:hover,
   &:focus {
-    $my_color: darken($color_2, 10%);
+    $my_color: darken($color_body_links, 10%);
     color: $my_color;
-    border-bottom: 1px solid $my_color;
   }
 }
 
@@ -383,8 +392,14 @@ fieldset {
     Buttons
 ============================================================ */
 
-button, input[type='submit'], input[type='button'], .button, a {
-  @include single-transition(all 0.05s ease-in-out);
+%animate {
+  @include transition-property('background-color,border,color,opacity');
+  @include transition-duration(0.15s);
+  @include transition-timing-function('ease-in-out');  
+}
+
+button, input[type='submit'], input[type='button'], input[type='reset'], .button, a {
+  @extend %animate;
 }
 button, input[type='submit'], input[type='button'], .button {
   -webkit-appearance: none;
