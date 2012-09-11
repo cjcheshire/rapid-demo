@@ -25,10 +25,12 @@ nav {
 header {
   @extend .clearfix;
   background-color: $color_1;
-  padding: 0 0 0 em(16px);
-  @include min-height(em(63px));
+  padding: 0 0 em(16px) em(16px);
+  @include min-height(63px);
   @include respond-min($pad) {
+    padding-bottom: 0;
     margin: em(20px) 0 em(1px) 0;
+    border-radius: 3px 3px 0 0;
   }
   .logo {
     margin: em(19px) 0 0 0;
@@ -43,7 +45,7 @@ header {
     }
   }
   ul {
-    margin: em(20px) 0 em(20px) 0;
+    margin: em(20px) 0 0 0;
     clear: both;
     @include respond-min($pad) {
       margin: em(34px) 0 0 0;
@@ -52,13 +54,16 @@ header {
     }
   }
   li {
-    line-height: em(17px);
+    line-height: lh(1.2);
     float: left;
     margin: 0 em(16px) 0 0;
     padding: 0 em(16px) 0 0;
     border-right: 1px solid #fff;
     color: #fff;
     font-size: em(12px);
+    @include respond-min($pad) {
+      line-height: em(17px);
+    }
     &:last-child {
       border: 0;
       margin-right: 0;
@@ -76,7 +81,13 @@ header {
   @extend .clearfix;
   overflow: visible;
   $height_nav: 31px;
-  background: $color_2;
+  $color_my_1: lighten($color_2,7%);
+  $color_my_2: $color_2;
+  background: $color_my_2;
+  @include filter-gradient($color_my_1, $color_my_2, vertical);
+  @include background-image(linear-gradient(top, $color_my_1 0%,$color_my_2 49%,$color_my_2 51%,$color_my_2 100%));
+  box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+  border-radius: 0 0 3px 3px;
   @include respond-min($pad) {
     height: $height_nav;
     ul {
@@ -84,6 +95,23 @@ header {
     }
     nav {
       float: left;
+    }
+  }
+  .demo {
+    @include respond-min($mobile + em(1px)) {
+      display: none;
+    }
+    a {
+      display: block;
+      height: $height_nav;
+      line-height: $height_nav;
+      text-align: center;
+      color: #fff;
+    }
+  }
+  nav {
+    @include respond-max($mobile) {
+      display: none;
     }
   }
   ul {
@@ -130,7 +158,7 @@ header {
       border-right: 1px solid $color_1;
       &:hover {
         color: #fff;
-        background-color: rgba(255,255,255,0.2);
+        background-color: rgba(255,255,255,0.075);
       }
     }
   }
@@ -215,11 +243,16 @@ header {
 
 .toolbar {
   @extend .clearfix;
+  $color_my_1: $color_3;
+  $color_my_2: darken($color_3,10%);
   margin: $margin_default 0 0 0;
   $height_bar: 44px;
   padding: 0 em(15px) em(15px) em(15px);
-  background: $color_3;
-  border: 1px solid darken($color_3,10);
+  background: $color_my_1;
+  @include filter-gradient($color_my_1, $color_my_2, vertical);
+  @include background-image(linear-gradient(top, $color_my_1 0%,$color_my_2 49%,$color_my_2 51%,$color_my_2 100%));
+  
+  border: 1px solid darken($color_3,15%);
   border-radius: 6px;
   @include respond-min($pad) {
     height: em($height_bar);
